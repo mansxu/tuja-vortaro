@@ -91,6 +91,12 @@ function blur_on_enter(keyevent) {
     }
 }
 
+function on_escape(keyevent) {
+    if (keyevent.keyCode === 27 || keyevent.key === "Escape") {
+        searchfield.select();
+    }
+}
+
 // Height of the entire document, independent of viewport.
 function docheight() {
     return Math.max(
@@ -284,6 +290,7 @@ function getqueryobj() {
     searchfield.addEventListener("input", on_keystroke, false);
 
     window.addEventListener("scroll", append_more_results_on_scroll, false);
+    window.addEventListener("keyup", on_escape, false);
 
     // For FirefoxOS, we want the Enter key to dismiss the on-screen keyboard.
     // Desktop doesn't have an on-screen keyboard, so Enter shouldn't lose focus.
