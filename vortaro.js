@@ -194,8 +194,9 @@ function search_exact(word, dict, dict_lower) {
 
     // Find all potentially matching candidates quickly.
     // Does not care whether the entry was in English or Esperanto.
-    for (i = 0; i < dict.length; ++i) {
+    for (i = 0; i < dict.length; i++) {
         entry = dict_lower[i];
+	if (!entry) continue;
 
         match = false;
         exactmatch = false;

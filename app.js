@@ -34,6 +34,18 @@ var languages = [
     ['pt', 'revo/revo-pt.js', 'revo_pt'],
     ['ru', 'revo/revo-ru.js', 'revo_ru'],
     ['sk', 'revo/revo-sk.js', 'revo_sk'],
+    ['be', 'vikipedio/vikipedio-be.js', 'vikipedio_be'],
+    ['cs', 'vikipedio/vikipedio-cs.js', 'vikipedio_cs'],
+    ['de', 'vikipedio/vikipedio-de.js', 'vikipedio_de'],
+    ['en', 'vikipedio/vikipedio-en.js', 'vikipedio_en'],
+    ['es', 'vikipedio/vikipedio-es.js', 'vikipedio_es'],
+    ['fr', 'vikipedio/vikipedio-fr.js', 'vikipedio_fr'],
+    ['hu', 'vikipedio/vikipedio-hu.js', 'vikipedio_hu'],
+    ['nl', 'vikipedio/vikipedio-nl.js', 'vikipedio_nl'],
+    ['pl', 'vikipedio/vikipedio-pl.js', 'vikipedio_pl'],
+    ['pt', 'vikipedio/vikipedio-pt.js', 'vikipedio_pt'],
+    ['ru', 'vikipedio/vikipedio-ru.js', 'vikipedio_ru'],
+    ['sk', 'vikipedio/vikipedio-sk.js', 'vikipedio_sk'],
 ];
 
 // Add an option to the language selector.
@@ -41,6 +53,11 @@ function add_language_option(value, text) {
     var option = document.createElement('option');
     option.text = text;
     option.value = value;
+    for (var i = 0; i < langfield.options.length; i++) {
+        if (langfield.options[i].value == value) {
+            return;
+        }
+    }
     langfield.options.add(option);
 }
 
@@ -63,7 +80,7 @@ function load_javascript(url, callback) {
 }
 
 function load_and_set_current_dictionary() {
-    for (var i = 0; i < languages.length; ++i) {
+    for (let i = 0; i < languages.length; ++i) {
         if (languages[i][0] !== langfield.value) {
             continue;
         }
@@ -75,12 +92,15 @@ function load_and_set_current_dictionary() {
             on_keystroke();
         } else {
             load_javascript(languages[i][1], function () {
+                if (typeof(global.dictionary) !== 'undefined') {
+                    global[languages[i][2]] = (global.dictionary).concat(global[languages[i][2]]);
+                    global[languages[i][2] + '_lower'] = (global.dictionary_lower).concat(global[languages[i][2] + '_lower']);
+                }
                 global.dictionary = global[languages[i][2]];
                 global.dictionary_lower = global[languages[i][2] + '_lower'] || global.dictionary;
                 on_keystroke();
             });
         }
-        return;
     }
 }
 
