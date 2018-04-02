@@ -46,6 +46,7 @@ var languages = [
     ['pt', 'vikipedio/vikipedio-pt.js', 'vikipedio_pt'],
     ['ru', 'vikipedio/vikipedio-ru.js', 'vikipedio_ru'],
     ['sk', 'vikipedio/vikipedio-sk.js', 'vikipedio_sk'],
+    ['en', 'komputeko/Komputeko-ENEO.js', 'komputeko_en'],
 ];
 
 // Add an option to the language selector.
